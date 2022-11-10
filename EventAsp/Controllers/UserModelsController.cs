@@ -9,85 +9,85 @@ using EventAsp.Models;
 
 namespace EventAsp.Controllers
 {
-    public class EventsController : Controller
+    public class UserModelsController : Controller
     {
         private readonly EventDbContext _context;
 
-        public EventsController(EventDbContext context)
+        public UserModelsController(EventDbContext context)
         {
             _context = context;
         }
 
-        // GET: Events
+        // GET: UserModels
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Events.ToListAsync());
+              return View(await _context.Users.ToListAsync());
         }
 
-        // GET: Events/Details/5
+        // GET: UserModels/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Events == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Events
+            var userModel = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            if (userModel == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(userModel);
         }
 
-        // GET: Events/Create
+        // GET: UserModels/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Events/Create
+        // POST: UserModels/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EventName,Description,CreationDate")] Event @event)
+        public async Task<IActionResult> Create([Bind("Id,Email,Password,JoinedOn")] UserModel userModel)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@event);
+                _context.Add(userModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(@event);
+            return View(userModel);
         }
 
-        // GET: Events/Edit/5
+        // GET: UserModels/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Events == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Events.FindAsync(id);
-            if (@event == null)
+            var userModel = await _context.Users.FindAsync(id);
+            if (userModel == null)
             {
                 return NotFound();
             }
-            return View(@event);
+            return View(userModel);
         }
 
-        // POST: Events/Edit/5
+        // POST: UserModels/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EventName,Description,CreationDate")] Event @event)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Email,Password,JoinedOn")] UserModel userModel)
         {
-            if (id != @event.Id)
+            if (id != userModel.Id)
             {
                 return NotFound();
             }
@@ -96,12 +96,12 @@ namespace EventAsp.Controllers
             {
                 try
                 {
-                    _context.Update(@event);
+                    _context.Update(userModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.Id))
+                    if (!UserModelExists(userModel.Id))
                     {
                         return NotFound();
                     }
@@ -112,49 +112,49 @@ namespace EventAsp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@event);
+            return View(userModel);
         }
 
-        // GET: Events/Delete/5
+        // GET: UserModels/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Events == null)
+            if (id == null || _context.Users == null)
             {
                 return NotFound();
             }
 
-            var @event = await _context.Events
+            var userModel = await _context.Users
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            if (userModel == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(userModel);
         }
 
-        // POST: Events/Delete/5
+        // POST: UserModels/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Events == null)
+            if (_context.Users == null)
             {
-                return Problem("Entity set 'EventDbContext.Events'  is null.");
+                return Problem("Entity set 'EventDbContext.Users'  is null.");
             }
-            var @event = await _context.Events.FindAsync(id);
-            if (@event != null)
+            var userModel = await _context.Users.FindAsync(id);
+            if (userModel != null)
             {
-                _context.Events.Remove(@event);
+                _context.Users.Remove(userModel);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EventExists(int id)
+        private bool UserModelExists(int id)
         {
-          return _context.Events.Any(e => e.Id == id);
+          return _context.Users.Any(e => e.Id == id);
         }
     }
 }

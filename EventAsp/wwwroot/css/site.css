@@ -1,5 +1,8 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
+    background-image: url("https://dm0qx8t0i9gc9.cloudfront.net/watermarks/image/rDtN98Qoishumwih/fantasy-vector-background_zkJwsdS__SB_PM.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @media (min-width: 768px) {

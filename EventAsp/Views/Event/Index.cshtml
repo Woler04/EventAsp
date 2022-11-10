@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EventAsp.Models.Event>
+﻿@model IEnumerable<EventAsp.Models.EventModel>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,19 @@
                 @Html.DisplayNameFor(model => model.EventName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Type)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Reviews)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AvrgScore)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Socials)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.CreationDate)
@@ -31,7 +43,19 @@
                 @Html.DisplayFor(modelItem => item.EventName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Reviews)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AvrgScore)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Socials)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.CreationDate)
